@@ -4,9 +4,9 @@
 |---|---|
 | Task | SWE-1 |
 | Owner | Software Engineer |
-| Status | Started |
+| Status | Approved |
 | Started | 2026-09-22 |
-| Finished | YYYY-MM-DD |
+| Finished | 2026-09-22 |
 | Depends on | None |
 | Hands off to | SWE-2 (AWS Foundation), SWE-3 (CI/CD), all roles (CONTRIBUTING.md) |
 
