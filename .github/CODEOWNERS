@@ -1,0 +1,22 @@
+# Who reviews what. The last matching line wins.
+
+# Default: software engineers own anything not listed below
+*                       @veritrace-lab-Bidemi/software-engineers
+
+# Business Analyst
+/docs/01-business/      @veritrace-lab-Bidemi/business-analysts
+
+# UX Designer
+/docs/02-design/        @veritrace-lab-Bidemi/ux-designers
+
+# Software Engineer
+/docs/03-engineering/   @veritrace-lab-Bidemi/software-engineers
+/.github/               @veritrace-lab-Bidemi/software-engineers
+/infra/                 @veritrace-lab-Bidemi/software-engineers
+/backend/               @veritrace-lab-Bidemi/software-engineers
+/frontend/              @veritrace-lab-Bidemi/software-engineers @veritrace-lab-Bidemi/ux-designers
+
+# AI/ML Engineer
+/docs/04-ml/            @veritrace-lab-Bidemi/ml-engineers
+/ml/                    @veritrace-lab-Bidemi/ml-engineers
+/ml/evaluation/         @veritrace-lab-Bidemi/ml-engineers @veritrace-lab-Bidemi/business-analysts
