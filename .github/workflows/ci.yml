@@ -60,13 +60,6 @@ jobs:
       - name: Check formatting
         run: terraform fmt -check -recursive ../..
 
-      - name: Show OIDC claims
-        run: |
-          URL="$ACTIONS_ID_TOKEN_REQUEST_URL&audience=sts.amazonaws.com"
-          TOKEN=$(curl -sS -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$URL" | python3 -c "import sys,json;print(json.load(sys.stdin)['value'])")
-          PAYLOAD=$(echo "$TOKEN" | cut -d. -f2)
-          python3 -c "import base64,json,sys;s=sys.argv[1];s+='='*(-len(s)%4);d=json.loads(base64.urlsafe_b64decode(s));print(json.dumps({k:d[k] for k in ('iss','aud','sub','repository','repository_owner','job_workflow_ref') if k in d},indent=2))" "$PAYLOAD"
-
       - name: Get AWS credentials
         uses: aws-actions/configure-aws-credentials@v6
         with:
