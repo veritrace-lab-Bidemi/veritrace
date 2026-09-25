@@ -4,8 +4,8 @@
 |---|---|
 | Task | SWE-3 |
 | Owner | Software Engineer |
-| Status | Started |
-| Started | 2026-09-24 |
+| Status | Draft |
+| Started | YYYY-MM-DD |
 | Finished | YYYY-MM-DD |
 | Depends on | SWE-1 (Repository), SWE-2 (AWS Foundation) |
 | Hands off to | SWE-5 (Backend API), ML-2 (Ingestion pipeline) |
