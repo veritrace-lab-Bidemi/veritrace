@@ -36,3 +36,4 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md) before your first change.
 | UX-1 | [User flow](docs/02-design/user-flow.md) |
 | UX-2 | [Wireframes](docs/02-design/wireframes.md) |
 | SWE-1 | [Repository setup](docs/03-engineering/swe-1-repo-setup.md) |
+| SWE-2 | [AWS foundation](docs/03-engineering/swe-2-aws-foundation.md) |

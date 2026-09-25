@@ -13,6 +13,11 @@ repos:
       - id: detect-private-key
       - id: no-commit-to-branch # blocks commits on main; work on a branch
 
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.109.1
+    hooks:
+      - id: terraform_fmt # formats .tf files (needs terraform installed)
+
   - repo: https://github.com/gitleaks/gitleaks
     rev: v8.30.1
     hooks:
