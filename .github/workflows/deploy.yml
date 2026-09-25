@@ -1,0 +1,63 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "infra/**"
+      - ".github/workflows/deploy.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-dev
+  cancel-in-progress: false
+
+env:
+  TERRAFORM_VERSION: 1.16.4
+
+jobs:
+  apply:
+    name: Terraform apply
+    runs-on: ubuntu-latest
+
+    # Waits for your approval before any AWS change.
+    environment: dev
+
+    permissions:
+      contents: read
+      id-token: write
+
+    defaults:
+      run:
+        working-directory: infra/envs/dev
+
+    env:
+      TF_VAR_alert_email: ${{ secrets.ALERT_EMAIL }}
+      TF_VAR_owner_username: ${{ secrets.OWNER_USERNAME }}
+      TF_VAR_github_org: ${{ github.repository_owner }}
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: hashicorp/setup-terraform@v4
+        with:
+          terraform_version: ${{ env.TERRAFORM_VERSION }}
+          terraform_wrapper: false
+
+      - name: Get AWS credentials
+        uses: aws-actions/configure-aws-credentials@v6
+        with:
+          role-to-assume: ${{ vars.AWS_ROLE_APPLY }}
+          aws-region: ${{ vars.AWS_REGION }}
+
+      - name: Init
+        run: terraform init -backend-config="bucket=${{ vars.TF_STATE_BUCKET }}"
+
+      - name: Plan
+        run: terraform plan -no-color -lock-timeout=5m -out=tfplan
+
+      - name: Apply
+        run: terraform apply -no-color -lock-timeout=5m tfplan
