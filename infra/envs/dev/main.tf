@@ -23,3 +23,10 @@ module "access" {
   project        = var.project
   owner_username = var.owner_username
 }
+
+module "cicd" {
+  source = "../../modules/cicd"
+
+  project    = var.project
+  github_org = var.github_org
+}

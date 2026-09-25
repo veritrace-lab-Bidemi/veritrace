@@ -31,3 +31,8 @@ variable "owner_username" {
   description = "Your IAM Identity Center user name"
   type        = string
 }
+
+variable "github_org" {
+  description = "GitHub organization that owns the repository"
+  type        = string
+}

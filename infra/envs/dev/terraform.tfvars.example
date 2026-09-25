@@ -2,3 +2,4 @@
 alert_email        = "you@example.com"
 owner_username     = "your.identity.center.username"
 monthly_budget_usd = 50
+github_org         = "your-github-org"

@@ -6,7 +6,7 @@
 | Owner | Software Engineer |
 | Status | Started |
 | Started | 2026-09-23 |
-| Finished | YYYY-MM-DD |
+| Finished | 2026-09-24 |
 | Depends on | SWE-1 (Repository) |
 | Hands off to | SWE-3 (CI/CD), ML-2 (Ingestion pipeline) |
 

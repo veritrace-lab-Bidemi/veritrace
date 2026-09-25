@@ -37,3 +37,4 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md) before your first change.
 | UX-2 | [Wireframes](docs/02-design/wireframes.md) |
 | SWE-1 | [Repository setup](docs/03-engineering/swe-1-repo-setup.md) |
 | SWE-2 | [AWS foundation](docs/03-engineering/swe-2-aws-foundation.md) |
+| SWE-3 | [CI/CD with OIDC](docs/03-engineering/swe-3-cicd.md) |
