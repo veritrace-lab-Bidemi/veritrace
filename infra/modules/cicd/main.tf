@@ -10,9 +10,10 @@ data "aws_kms_alias" "state" {
 }
 
 locals {
-  account_id   = data.aws_caller_identity.current.account_id
-  partition    = data.aws_partition.current.partition
-  repo         = "${var.github_org}/${var.github_repo}"
+  account_id = data.aws_caller_identity.current.account_id
+  partition  = data.aws_partition.current.partition
+  # GitHub issues subjects with immutable numeric IDs, so names alone never match.
+  repo         = "${var.github_org}@${var.github_org_id}/${var.github_repo}@${var.github_repo_id}"
   state_bucket = "${var.project}-tfstate-${data.aws_caller_identity.current.account_id}"
 }
 

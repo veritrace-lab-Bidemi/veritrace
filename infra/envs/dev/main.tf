@@ -27,6 +27,8 @@ module "access" {
 module "cicd" {
   source = "../../modules/cicd"
 
-  project    = var.project
-  github_org = var.github_org
+  project        = var.project
+  github_org     = var.github_org
+  github_org_id  = var.github_org_id
+  github_repo_id = var.github_repo_id
 }

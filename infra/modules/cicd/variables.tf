@@ -13,7 +13,15 @@ variable "github_repo" {
   type        = string
   default     = "veritrace"
 }
+variable "github_org_id" {
+  description = "Numeric GitHub organization ID. GitHub puts it in the OIDC subject"
+  type        = string
+}
 
+variable "github_repo_id" {
+  description = "Numeric repository ID. GitHub puts it in the OIDC subject"
+  type        = string
+}
 variable "deploy_environment" {
   description = "GitHub environment that may assume the apply role"
   type        = string
