@@ -1,0 +1,90 @@
+name: CI
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  GITLEAKS_VERSION: 8.30.1
+  TERRAFORM_VERSION: 1.16.4
+
+jobs:
+  secrets:
+    name: Secret scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Install gitleaks
+        run: |
+          curl -sSL -o gitleaks.tar.gz \
+            "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz"
+          tar -xzf gitleaks.tar.gz gitleaks
+          sudo mv gitleaks /usr/local/bin/
+
+      - name: Scan repository
+        run: gitleaks dir . --redact --no-banner
+
+  terraform:
+    name: Terraform plan
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      id-token: write # required to request the OIDC token
+      pull-requests: write # required to comment the plan
+
+    defaults:
+      run:
+        working-directory: infra/envs/dev
+
+    env:
+      TF_VAR_alert_email: ${{ secrets.ALERT_EMAIL }}
+      TF_VAR_owner_username: ${{ secrets.OWNER_USERNAME }}
+      TF_VAR_github_org: ${{ github.repository_owner }}
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: hashicorp/setup-terraform@v4
+        with:
+          terraform_version: ${{ env.TERRAFORM_VERSION }}
+          terraform_wrapper: false
+
+      - name: Check formatting
+        run: terraform fmt -check -recursive ../..
+
+      - name: Get AWS credentials
+        uses: aws-actions/configure-aws-credentials@v6
+        with:
+          role-to-assume: ${{ vars.AWS_ROLE_PLAN }}
+          aws-region: ${{ vars.AWS_REGION }}
+
+      - name: Init
+        run: terraform init -backend-config="bucket=${{ vars.TF_STATE_BUCKET }}"
+
+      - name: Validate
+        run: terraform validate
+
+      - name: Plan
+        id: plan
+        run: terraform plan -no-color -lock-timeout=5m | tee plan.txt
+
+      - name: Comment plan on the pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          {
+            echo "### Terraform plan"
+            echo '```'
+            tail -c 60000 plan.txt
+            echo '```'
+          } > comment.md
+          gh pr comment "$PR" --body-file comment.md --repo "$GITHUB_REPOSITORY"
