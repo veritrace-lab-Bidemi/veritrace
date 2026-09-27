@@ -1,0 +1,5 @@
+# ML-1 spike. Parsing and chunking use the standard library only.
+pytest==9.1.1
+
+# Exact token counts. Downloads its vocabulary on first use.
+tiktoken==0.14.0
