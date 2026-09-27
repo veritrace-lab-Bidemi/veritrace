@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Schema-faithful fixture, not real regulatory text. Element names, TYPE values
+  and the flat <P> numbering follow the GPO eCFR XML User Guide. Paragraph text
+  is placeholder prose sized like the real thing, so chunking can be measured
+  without treating invented text as a source.
+
+  Section 9990.100 exercises the ambiguous marker: (i) as the ninth lowercase
+  letter at the top level. Section 9990.200 exercises (a)(1)(i)(A) nesting.
+-->
+<ECFR>
+  <DIV1 N="1" NODE="31:1" TYPE="TITLE">
+    <HEAD>Title 31—Money and Finance: Treasury</HEAD>
+    <DIV2 N="B" NODE="31:1.1" TYPE="SUBTITLE">
+      <HEAD>Subtitle B—Regulations Relating to Money and Finance</HEAD>
+      <DIV3 N="X" NODE="31:1.1.1" TYPE="CHAPTER">
+        <HEAD>CHAPTER X—FINANCIAL CRIMES ENFORCEMENT NETWORK, DEPARTMENT OF THE TREASURY</HEAD>
+        <DIV5 N="9990" NODE="31:1.1.1.1" TYPE="PART">
+          <HEAD>PART 9990—FIXTURE RULES FOR TESTING</HEAD>
+          <DIV6 N="B" NODE="31:1.1.1.1.2" TYPE="SUBPART">
+            <HEAD>Subpart B—Fixture Requirements</HEAD>
+            <DIV8 N="§ 9990.100" NODE="31:1.1.1.1.2.0.1.1" TYPE="SECTION">
+              <HEAD>§ 9990.100   Definitions for fixture purposes.</HEAD>
+              <P>For purposes of this part, the following definitions apply to every determination a covered institution is required to make.</P>
+              <P>(a) <I>Covered institution</I> means an entity described in the scope provision of this subpart, including any branch or agency of that entity that carries on the activities described in this section.</P>
+              <P>(b) <I>Account</I> means a formal relationship established to provide or engage in services, dealings, or other financial transactions, and includes any relationship that is continuing in nature.</P>
+              <P>(c) <I>Customer</I> means a person who opens a new account, and any person granted authority over an account with respect to which such authority is exercised.</P>
+              <P>(d) <I>Beneficial owner</I> means each individual who owns or controls a specified percentage of the equity interests of a legal entity customer, determined in accordance with the procedures the institution adopts.</P>
+              <P>(e) <I>Business day</I> means a day on which the institution is open to the public for carrying on substantially all of its business functions.</P>
+              <P>(f) <I>Identifying information</I> means the items a covered institution is required to obtain before opening an account, and any additional items the institution elects to obtain under its own procedures.</P>
+              <P>(g) <I>Reasonable period</I> means a period determined by the institution in light of the risks presented, documented in its written procedures, and applied consistently across comparable relationships.</P>
+              <P>(h) <I>Written procedures</I> means procedures that are recorded, approved by the institution's governing body, and available for examination on request.</P>
+              <P>(i) <I>Verification</I> means the steps a covered institution takes to form a reasonable belief that it knows the true identity of a customer, whether through documents, non-documentary methods, or a combination of both.</P>
+              <CITA TYPE="N">[80 FR 11111, Jan. 2, 2015, as amended at 90 FR 22222, Mar. 3, 2025]</CITA>
+            </DIV8>
+            <DIV8 N="§ 9990.200" NODE="31:1.1.1.1.2.0.1.2" TYPE="SECTION">
+              <HEAD>§ 9990.200   Fixture program requirements.</HEAD>
+              <P>(a) <I>Program requirements</I>—</P>
+              <P>(1) <I>In general.</I> A covered institution must implement a written program appropriate for its size and type of business that includes the requirements set out in paragraphs (a)(1) through (3) of this section. The program must be part of the institution's broader compliance framework and must be approved before it is put into effect.</P>
+              <P>(2) <I>Procedures.</I> The program must include risk-based procedures sufficient to support the determinations the institution is required to make, and those procedures must be based on an assessment of the relevant risks.</P>
+              <P>(i) <I>Information required.</I> The procedures must specify the information the institution obtains before establishing a relationship.</P>
+              <P>(A) <I>In general.</I> At a minimum the institution obtains the items enumerated in its written procedures, which must cover name, date of establishment, address, and an identifying number.</P>
+              <P>(B) <I>Exception.</I> The procedures may permit a relationship to be established before an identifying number is received, provided the institution obtains it within a reasonable period and documents the basis for the delay.</P>
+              <P>(ii) <I>Verification.</I> The procedures must describe the methods used to verify the information obtained, and must state when each method is appropriate.</P>
+              <P>(iii) <I>Failure to verify.</I> The procedures must describe the circumstances in which the institution will decline to establish a relationship, will restrict activity pending verification, or will terminate an existing relationship.</P>
+              <P>(3) <I>Recordkeeping.</I> The institution must retain a record of the information obtained and of the methods used to verify it for five years after the relationship ends.</P>
+              <P>(b) <I>Exemptions.</I> The appropriate authority may exempt a covered institution or a category of relationships from any requirement of this section by written order, after considering whether the exemption is consistent with the purposes of this part.</P>
+              <P>(c) <I>Other requirements unaffected.</I> Nothing in this section relieves a covered institution of any obligation imposed by another provision of this chapter.</P>
+              <CITA TYPE="N">[85 FR 33333, Apr. 4, 2020]</CITA>
+            </DIV8>
+          </DIV6>
+        </DIV5>
+      </DIV3>
+    </DIV2>
+  </DIV1>
+</ECFR>
