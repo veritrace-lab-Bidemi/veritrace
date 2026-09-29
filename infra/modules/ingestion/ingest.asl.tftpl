@@ -1,0 +1,116 @@
+{
+  "Comment": "Veritrace offline ingestion: resolve the issue date, fetch and transform each part, then write the manifest.",
+  "StartAt": "Resolve",
+  "States": {
+    "Resolve": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "${lambda_arn}",
+        "Payload": {
+          "action": "resolve",
+          "source_id.$": "$.source_id",
+          "as_of.$": "$.as_of",
+          "parts.$": "$.parts",
+          "max_tokens.$": "$.max_tokens"
+        }
+      },
+      "OutputPath": "$.Payload",
+      "Retry": [
+        {
+          "ErrorEquals": ["States.TaskFailed", "Lambda.ServiceException", "Lambda.TooManyRequestsException"],
+          "IntervalSeconds": 5,
+          "MaxAttempts": 3,
+          "BackoffRate": 2
+        }
+      ],
+      "Next": "IngestParts"
+    },
+
+    "IngestParts": {
+      "Type": "Map",
+      "ItemsPath": "$.parts",
+      "MaxConcurrency": ${max_concurrency},
+      "ItemSelector": {
+        "action": "fetch",
+        "part.$": "$$.Map.Item.Value",
+        "source_id.$": "$.source_id",
+        "as_of.$": "$.as_of",
+        "run_id.$": "$.run_id",
+        "max_tokens.$": "$.max_tokens"
+      },
+      "ItemProcessor": {
+        "ProcessorConfig": { "Mode": "INLINE" },
+        "StartAt": "Fetch",
+        "States": {
+          "Fetch": {
+            "Type": "Task",
+            "Resource": "arn:aws:states:::lambda:invoke",
+            "Parameters": {
+              "FunctionName": "${lambda_arn}",
+              "Payload.$": "$"
+            },
+            "ResultPath": "$.fetched",
+            "Retry": [
+              {
+                "ErrorEquals": ["States.TaskFailed", "Lambda.ServiceException", "Lambda.TooManyRequestsException"],
+                "IntervalSeconds": 10,
+                "MaxAttempts": 4,
+                "BackoffRate": 2
+              }
+            ],
+            "Next": "Transform"
+          },
+
+          "Transform": {
+            "Type": "Task",
+            "Resource": "arn:aws:states:::lambda:invoke",
+            "Parameters": {
+              "FunctionName": "${lambda_arn}",
+              "Payload": {
+                "action": "transform",
+                "part.$": "$.part",
+                "source_id.$": "$.source_id",
+                "as_of.$": "$.as_of",
+                "run_id.$": "$.run_id",
+                "max_tokens.$": "$.max_tokens"
+              }
+            },
+            "OutputPath": "$.Payload",
+            "Retry": [
+              {
+                "ErrorEquals": ["Lambda.ServiceException", "Lambda.TooManyRequestsException"],
+                "IntervalSeconds": 5,
+                "MaxAttempts": 2,
+                "BackoffRate": 2
+              }
+            ],
+            "End": true
+          }
+        }
+      },
+      "ResultPath": "$.part_results",
+      "Next": "Finalize"
+    },
+
+    "Finalize": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "${lambda_arn}",
+        "Payload": {
+          "action": "finalize",
+          "source_id.$": "$.source_id",
+          "as_of.$": "$.as_of",
+          "run_id.$": "$.run_id",
+          "started_at.$": "$.started_at",
+          "token_counter.$": "$.token_counter",
+          "max_tokens.$": "$.max_tokens",
+          "parts.$": "$.part_results"
+        }
+      },
+      "OutputPath": "$.Payload",
+      "End": true
+    }
+  }
+}

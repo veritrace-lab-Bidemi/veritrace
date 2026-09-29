@@ -37,6 +37,12 @@ variable "github_org" {
   type        = string
 }
 
+variable "lambda_zip_path" {
+  description = "Ingestion package. Run scripts/build_lambda.sh before plan"
+  type        = string
+  default     = "../../../build/veritrace-ingest.zip"
+}
+
 # Public identifiers, not secrets. GitHub puts them in the OIDC subject claim.
 # gh api orgs/<org> --jq .id  and  gh api repos/<org>/<repo> --jq .id
 variable "github_org_id" {

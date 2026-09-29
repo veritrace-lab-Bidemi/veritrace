@@ -39,3 +39,4 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md) before your first change.
 | SWE-2 | [AWS foundation](docs/03-engineering/swe-2-aws-foundation.md) |
 | SWE-3 | [CI/CD with OIDC](docs/03-engineering/swe-3-cicd.md) |
 | ML-1 | [Source and chunking spike](docs/04-ml/ml-1-data-spike.md) |
+| ML-2 | [Ingestion pipeline](docs/04-ml/ml-2-ingestion.md) |

@@ -22,3 +22,18 @@ output "state_bucket" {
   description = "Set as the TF_STATE_BUCKET repository variable"
   value       = module.cicd.state_bucket
 }
+
+output "data_bucket" {
+  description = "Raw XML, chunk records and manifests"
+  value       = module.ingestion.data_bucket
+}
+
+output "ingest_state_machine_arn" {
+  description = "Start this to run an ingestion"
+  value       = module.ingestion.state_machine_arn
+}
+
+output "ingest_lambda_name" {
+  description = "Ingestion function, for reading logs"
+  value       = module.ingestion.lambda_name
+}

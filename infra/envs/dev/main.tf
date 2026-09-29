@@ -24,6 +24,13 @@ module "access" {
   owner_username = var.owner_username
 }
 
+module "ingestion" {
+  source = "../../modules/ingestion"
+
+  project         = var.project
+  lambda_zip_path = var.lambda_zip_path
+}
+
 module "cicd" {
   source = "../../modules/cicd"
 
