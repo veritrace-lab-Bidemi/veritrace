@@ -9,7 +9,6 @@
 .env.*
 !.env.example
 *.pem
-!backend.hcl.example
 
 # Python
 __pycache__/
@@ -39,3 +38,6 @@ override.tf.json
 
 # Local data downloads (data lives in S3, not Git)
 /data/
+
+# Lambda build output
+/build/

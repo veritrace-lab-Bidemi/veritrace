@@ -1,0 +1,4 @@
+# Runtime dependencies only. boto3 ships with the Lambda runtime.
+# Parsing and chunking use the standard library; tiktoken is here because chunk
+# budgets must be counted exactly rather than estimated.
+tiktoken==0.14.0
